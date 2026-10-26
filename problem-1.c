@@ -11,12 +11,17 @@ Given an array of integers, determine the length of the longest contiguous stret
 
 #include<stdio.h>
 
-int takeinput(int size, int num[]);
+void takeinput(int size, int num[]);
+
 int checkforlogic(int size, int num[]);
 
 int main()
 {
-    int size=8; 
+    int size;
+
+    printf("Enter The size of The Array : ");
+    scanf("%d", &size);
+    
     int num[size], res=0;
 
     //input leva mate nu function
@@ -24,11 +29,13 @@ int main()
 
     // input ne check karva , return ma intiger value api dese
     res = checkforlogic(size, num);
-    printf("res = %d ", res);
+
+    printf("res = %d\n", res);
+
     return 0;
 }
 
-int takeinput(int size, int num[]){
+void takeinput(int size, int num[]){
 
     for (int i = 0; i < size; i++)
     {
@@ -38,23 +45,22 @@ int takeinput(int size, int num[]){
 
 }
 
-int checkforlogic(int size,int num[]){
+int checkforlogic(int size, int num[]){
 
-    int scount = 0;
-    int longest_s = 0;
+    int s_count = 1, longest_s = 1;
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < (size); i++)
     {
         if (num[i] < num[i+1])
         {
-            scount++;
-        }else if(num[i] > num[i+1]){
-            if (scount > longest_s)
+            s_count++;
+        }else
+        {
+            if (s_count > longest_s)
             {
-                longest_s = scount;
+                longest_s = s_count;
             }
-            
-            scount = 0;
+            s_count = 1;
         }
     }
     return longest_s;
